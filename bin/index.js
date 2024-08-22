@@ -8,7 +8,22 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Enter package name: ", (packageName) => {
-  utils.createPackage(packageName);
-  rl.close();
-});
+(async () => {
+  const { default: chalk } = await import("chalk");
+  const { default: boxen } = await import("boxen");
+
+  console.log(
+    "\n" +
+      boxen(chalk.green("\n" + "hello this is a test" + "\n"), {
+        padding: 1,
+        borderColor: "green",
+        dimBorder: true,
+      }) +
+      "\n"
+  );
+
+  rl.question("Enter package name: ", (packageName) => {
+    utils.createPackage(packageName);
+    rl.close();
+  });
+})();
