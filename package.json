@@ -1,0 +1,17 @@
+{
+  "name": "ts-package-cli",
+  "version": "1.0.0",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ts-package-cli": "bin/index.js"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
