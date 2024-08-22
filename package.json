@@ -13,5 +13,8 @@
   ],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
 }
