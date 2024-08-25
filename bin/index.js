@@ -18,20 +18,11 @@ const question = (query) => {
 
 const main = async () => {
   try {
-    const packageName = await question("Enter package name: ");
-    const packageDescription = await question("Enter package description: ");
-
-    await execPromise("npm init --yes");
-
-    const data = await fs.readFile("package.json", "utf8");
-    const packageJson = JSON.parse(data);
-
-    packageJson.name = packageName;
-    packageJson.description = packageDescription;
-
-    await fs.writeFile("package.json", JSON.stringify(packageJson, null, 2));
-
-    utils.createPackage(packageName);
+    //Create package.json
+    const packageData = {};
+    packageData.packageName = await question("Enter package name: ");
+    packageData.packageDescription = await question("Enter package description: ");
+    await utils.createPackage(packageData);
   } catch (error) {
     console.error(`Error: ${error}`);
   } finally {
