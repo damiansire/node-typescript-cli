@@ -2,11 +2,7 @@
 const yargs = require("yargs");
 const utils = require("./utils.js");
 const readline = require("readline");
-const { exec } = require("child_process");
-const fs = require("fs").promises;
-const util = require("util");
 
-const execPromise = util.promisify(exec);
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -23,6 +19,10 @@ const main = async () => {
     packageData.packageName = await question("Enter package name: ");
     packageData.packageDescription = await question("Enter package description: ");
     await utils.createPackage(packageData);
+
+    // Create .gitignore and initialize Git
+    await utils.createGitignore();
+    await utils.initializeGit();
   } catch (error) {
     console.error(`Error: ${error}`);
   } finally {
