@@ -27,6 +27,7 @@ async function createPackage(packageData) {
 
   packageJson.name = packageData.packageName;
   packageJson.description = packageData.packageDescription;
+  packageJson.scripts.build = "tsc";
 
   await fs.writeFile("package.json", JSON.stringify(packageJson, null, 2));
   console.log("paquete: ", packageData.packageName, "creado");
@@ -57,10 +58,57 @@ const initializeGit = async () => {
   }
 };
 
+const createTypescriptProject = async () => {
+  console.log("Instaling Typescript.");
+  await execPromise("npm i -D typescript");
+  console.log("Initializing Typescript");
+  // Define la configuración de tsconfig
+  const tsconfig = {
+    files: ["src/index.ts"],
+    compilerOptions: {
+      target: "es2015",
+      module: "es2015",
+      declaration: true,
+      outDir: "./dist",
+      noEmit: false,
+      strict: true,
+      noImplicitAny: true,
+      strictNullChecks: true,
+      strictFunctionTypes: true,
+      strictBindCallApply: true,
+      strictPropertyInitialization: true,
+      noImplicitThis: true,
+      alwaysStrict: true,
+      noUnusedLocals: true,
+      noUnusedParameters: true,
+      noImplicitReturns: true,
+      noFallthroughCasesInSwitch: true,
+      noUncheckedIndexedAccess: true,
+      noImplicitOverride: true,
+      noPropertyAccessFromIndexSignature: true,
+      esModuleInterop: true,
+      forceConsistentCasingInFileNames: true,
+      skipLibCheck: true,
+    },
+  };
+
+  const tsconfigPath = path.join(process.cwd(), "tsconfig.json");
+
+  try {
+    // Escribe el archivo tsconfig.json de manera asíncrona
+    await fs.writeFile(tsconfigPath, JSON.stringify(tsconfig, null, 2));
+    console.log("tsconfig.json created successfully.");
+  } catch (err) {
+    console.error("Error creating tsconfig.json:", err);
+    process.exit(1);
+  }
+};
+
 module.exports = {
   showAll: showAll,
   showHelp: showHelp,
   createPackage: createPackage,
   createGitignore,
   initializeGit,
+  createTypescriptProject,
 };

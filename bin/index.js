@@ -23,6 +23,9 @@ const main = async () => {
     // Create .gitignore and initialize Git
     await utils.createGitignore();
     await utils.initializeGit();
+
+    // Create typescript project
+    await utils.createTypescriptProject();
   } catch (error) {
     console.error(`Error: ${error}`);
   } finally {
