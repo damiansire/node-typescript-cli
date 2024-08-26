@@ -26,6 +26,9 @@ const main = async () => {
 
     // Create typescript project
     await utils.createTypescriptProject();
+
+    // Create jest
+    await utils.createJestsTest();
   } catch (error) {
     console.error(`Error: ${error}`);
   } finally {

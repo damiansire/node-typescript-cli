@@ -104,6 +104,16 @@ const createTypescriptProject = async () => {
   }
 };
 
+const createJestsTest = async () => {
+  console.log("instaling jest");
+  await execPromise("npm i -D jest");
+  console.log("instaling @types");
+  await execPromise("npm i -D @types/jest");
+  console.log("instaling ts-jest");
+  await execPromise("npm i -D ts-jest");
+  console.log("creating jest configg");
+};
+
 module.exports = {
   showAll: showAll,
   showHelp: showHelp,
@@ -111,4 +121,5 @@ module.exports = {
   createGitignore,
   initializeGit,
   createTypescriptProject,
+  createJestsTest,
 };
